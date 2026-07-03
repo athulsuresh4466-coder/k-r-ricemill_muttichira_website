@@ -26,11 +26,13 @@ SECRET_KEY = 'django-insecure-%1*fdi$5$)29v#7h=7%1q7ry!8yq7w)8=s_q0eohc-)w$@v$%s
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'athuls1.pythonanywhere.com',
+    'www.athuls1.pythonanywhere.com',
     '127.0.0.1',
     'localhost',
-    'athuls1.pythonanywhere.com',
-    '.pythonanywhere.com',
 ]
+
+
 
 
 
@@ -128,3 +130,6 @@ STATIC_ROOT = BASE_DIR / 'C:/Users/Athul S/myproject/myproject/myapp/static'
 
 MEDIA_ROOT = BASE_DIR / 'uploads'
 MEDIA_URL = '/media/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

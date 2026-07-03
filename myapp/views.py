@@ -1,31 +1,35 @@
 from django.shortcuts import render
+from .models import homeService, OurService, PriceItem, ContactMessage
 
-# Create your views here.
+def home(request):
 
-from .models import (
-    Service,
-    HomeService,
-    ContactMessage,
-    AboutSection,
-    Project,          # 👈 ADD THIS
-)
-def page5(request):
-    services = Service.objects.all()
-    home_services = HomeService.objects.filter(is_active=True)
-    about_sections = AboutSection.objects.all()
-    projects = Project.objects.all()   # 👈 ADD THIS
+    # Fetch data for homepage
+    home_services = homeService.objects.all()
+    our_services = OurService.objects.all()
+    prices = PriceItem.objects.all()
 
+    # Handle Contact Form Submission
     if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+
         ContactMessage.objects.create(
-            name=request.POST.get("name"),
-            email=request.POST.get("email"),
-            service=request.POST.get("service"),
-            message=request.POST.get("message"),
+            name=name,
+            email=email,
+            message=message
         )
 
+        return render(request, "new.html", {
+            "home_services": home_services,
+            "our_services": our_services,
+            "prices": prices,
+            "success": True
+        })
+
+    # Normal page load
     return render(request, "new.html", {
-        "services": services,
         "home_services": home_services,
-        "about_sections": about_sections,
-        "projects": projects,     # 👈 PASS TO TEMPLATE
+        "our_services": our_services,
+        "prices": prices
     })

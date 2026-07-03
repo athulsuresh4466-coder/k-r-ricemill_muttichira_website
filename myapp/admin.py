@@ -1,64 +1,7 @@
 from django.contrib import admin
+from .models import homeService,OurService,PriceItem,ContactMessage
 
-# Register your models here.
-from django.contrib import admin
-
-
-
-
-
-
-from .models import Service, ServiceFeature
-
-class ServiceFeatureInline(admin.TabularInline):
-    model = ServiceFeature
-    extra = 1
-
-@admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = ("title",)
-    inlines = [ServiceFeatureInline]
-
-
-from .models import HomeService
-
-@admin.register(HomeService)
-class HomeServiceAdmin(admin.ModelAdmin):
-    list_display = ("title", "is_active")
-    list_filter = ("is_active",)
-
-
-
-from .models import Project
-
-@admin.register(Project)
-class ProjectAdmin(admin.ModelAdmin):
-    list_display = ("title",)
-
-
-
-from .models import ContactMessage
-
-@admin.register(ContactMessage)
-class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "service", "created_at")
-    list_filter = ("service", "created_at")
-    search_fields = ("name", "email", "message")
-
-
-
-
-
-from django.contrib import admin
-from .models import AboutSection
-
-@admin.register(AboutSection)
-class AboutSectionAdmin(admin.ModelAdmin):
-    list_display = ("title",)
-
-
-
-
-
-
-
+admin.site.register(homeService)
+admin.site.register(OurService)
+admin.site.register(PriceItem)
+admin.site.register(ContactMessage)
